@@ -73,8 +73,7 @@ const RegisterUI = ({ setMovies }) => {
               if (loginResponse.status === 200) {
                 setLoggedIn(true);
                 localStorage.setItem("token", data.data.token);
-                localStorage.setItem("username", data.data.username);
-                localStorage.setItem("userId", data.data.userId);
+                localStorage.setItem("userId", data.user.userId);
 
                 let userId = data.data.userId;
                 const moviesResponse = await fetch(

@@ -53,7 +53,7 @@ const RegisterUI = ({ setMovies }) => {
     async function registUser() {
       try {
         const registerResponse = await fetch(
-          "https://rich-wasp-capris.cyclic.app/register",
+          "https://puce-glorious-turtle.cyclic.app/register",
           opts
         );
 
@@ -64,7 +64,7 @@ const RegisterUI = ({ setMovies }) => {
           async function loginUser() {
             try {
               const loginResponse = await fetch(
-                "https://rich-wasp-capris.cyclic.app/login",
+                "https://puce-glorious-turtle.cyclic.app/login",
                 opts
               );
               const data = await loginResponse.json();
@@ -77,7 +77,7 @@ const RegisterUI = ({ setMovies }) => {
 
                 let userId = data.data.userId;
                 const moviesResponse = await fetch(
-                  `https://rich-wasp-capris.cyclic.app/movie`
+                  `https://puce-glorious-turtle.cyclic.app/movie`
                 );
                 const moviesData = await moviesResponse.json();
                 setMovies(moviesData);

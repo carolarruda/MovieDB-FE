@@ -55,7 +55,7 @@ const LoginUI = ({ setMovies }) => {
     async function loginUser() {
       try {
         const loginResponse = await fetch(
-          `https://rich-wasp-capris.cyclic.app/login`,
+          `https://puce-glorious-turtle.cyclic.app/login`,
           opts
         );
         const data = await loginResponse.json();
@@ -73,7 +73,7 @@ const LoginUI = ({ setMovies }) => {
             }
           };
           const moviesResponse = await fetch(
-            `https://rich-wasp-capris.cyclic.app/movie`, opts2
+            `https://puce-glorious-turtle.cyclic.app/movie`, opts2
           );
           const moviesData = await moviesResponse.json();
           console.log('here',moviesData);

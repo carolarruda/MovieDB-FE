@@ -19,7 +19,7 @@ const MovieList = ({ movies, setMovies }) => {
     if (token) {
 
 
-      fetch(`https://rich-wasp-capris.cyclic.app/movie`, {
+      fetch(`https://puce-glorious-turtle.cyclic.app/movie`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -71,7 +71,7 @@ const MovieList = ({ movies, setMovies }) => {
       body: JSON.stringify(newMovie),
     };
 
-    fetch(`https://rich-wasp-capris.cyclic.app/movie`, opts)
+    fetch(`https://puce-glorious-turtle.cyclic.app/movie`, opts)
       .then((res) => res.json())
       .then((data) => {
         setTitle("");
@@ -79,7 +79,7 @@ const MovieList = ({ movies, setMovies }) => {
         setRuntimeMins("");
         setUrl("");
         setMovies(data);
-        fetch(`https://rich-wasp-capris.cyclic.app/movie`, {
+        fetch(`https://puce-glorious-turtle.cyclic.app/movie`, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",

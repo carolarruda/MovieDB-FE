@@ -8,7 +8,7 @@ import "./App.css";
 
 export const Context = React.createContext();
 
-const apiUrl = "https://rich-wasp-capris.cyclic.app";
+const apiUrl = "https://puce-glorious-turtle.cyclic.app";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -23,7 +23,7 @@ function App() {
         }
       };
       setLoggedIn(true);
-      fetch(`https://rich-wasp-capris.cyclic.app/movie`, opts2)
+      fetch(`https://puce-glorious-turtle.cyclic.app/movie`, opts2)
         .then((res) => res.json())
         .then((data) => {
 

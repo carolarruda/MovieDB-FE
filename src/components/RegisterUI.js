@@ -72,15 +72,9 @@ const RegisterUI = ({ setMovies }) => {
 
               if (loginResponse.status === 200) {
                 setLoggedIn(true);
-                localStorage.setItem("token", data.data.token);
+                localStorage.setItem("token", data.token);
                 localStorage.setItem("userId", data.user.userId);
 
-                let userId = data.data.userId;
-                const moviesResponse = await fetch(
-                  `https://puce-glorious-turtle.cyclic.app/movie`
-                );
-                const moviesData = await moviesResponse.json();
-                setMovies(moviesData);
                 navigate(`/home`);
               } else if (loginResponse.status === 409) {
                 setFailed(true);

@@ -82,20 +82,15 @@ const RegisterUI = ({ setMovies }) => {
                 const moviesData = await moviesResponse.json();
                 setMovies(moviesData);
                 navigate(`/home`);
-              } else if (loginResponse.status === 404) {
+              } else if (loginResponse.status === 409) {
                 setFailed(true);
+                setWrong(true);
                 setRed("red");
+                setRedTwo("red");
                 setRedTwo("");
                 setShake(sk);
                 setShakeTwo("");
                 console.log("Please use register to create a new user");
-              } else if (loginResponse.status === 401) {
-                setWrong(true);
-                setFailed(false);
-                setRedTwo("red");
-                setRed("");
-                setShakeTwo(sk);
-                setShake("");
               }
             } catch (error) {
               console.error("Error occurred during login: ", error);
@@ -129,7 +124,6 @@ const RegisterUI = ({ setMovies }) => {
           </div>
 
           <form onSubmit={handleSubmit} className="formy">
-
             <label htmlFor="email">Email</label>
             <input
               style={{

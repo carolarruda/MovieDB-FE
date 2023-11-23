@@ -39,7 +39,7 @@ const RegisterUI = ({ setMovies }) => {
     e.preventDefault();
 
     const newUser = {
-      username,
+      email,
       password,
     };
     const opts = {

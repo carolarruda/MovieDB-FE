@@ -107,7 +107,7 @@ const RegisterUI = ({ setMovies }) => {
           setFailed(true);
           setRed("red");
           setShake(sk);
-          console.log("Please choose a different username");
+          console.log("Please choose a different email");
         }
       } catch (error) {
         console.error("Error occurred during register: ", error);
@@ -130,7 +130,7 @@ const RegisterUI = ({ setMovies }) => {
 
           <form onSubmit={handleSubmit} className="formy">
 
-            <label htmlFor="username">Email</label>
+            <label htmlFor="email">Email</label>
             <input
               style={{
                 color: `${red}`,

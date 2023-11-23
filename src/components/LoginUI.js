@@ -115,7 +115,7 @@ const LoginUI = ({ setMovies }) => {
           </div>
 
           <form onSubmit={handleSubmit} className="formy">
-            <label htmlFor="username">Email</label>
+            <label htmlFor="email">Email</label>
             <input
               style={{
                 color: `${red}`,
@@ -141,14 +141,10 @@ const LoginUI = ({ setMovies }) => {
               value={password}
               onChange={handlePassword}
             />
-            {failed && (
-              <div className="error">
-                The username you have entered is not associated with an account.
-              </div>
-            )}
+
             {!failed && !wrong && <div></div>}
             {!failed && wrong && (
-              <div className="error">You have entered an invalid username or password</div>
+              <div className="error">You have entered an invalid email or password</div>
             )}
 
             <button className="log-but" type="submit">

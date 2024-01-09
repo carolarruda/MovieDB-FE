@@ -2,14 +2,11 @@ import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../client/App";
 import "./styles/style.css";
 import { useNavigate } from "react-router-dom";
-import { keyframes } from "styled-components";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import classes from "./Sign.module.css";
-import EmailIcon from "@mui/icons-material/Email";
-import { Height } from "@mui/icons-material";
 
-const Login = ({ setMovies, movies }) => {
+const Login = ({ setMovies, movies, register }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useContext(Context);
@@ -20,6 +17,7 @@ const Login = ({ setMovies, movies }) => {
   const [redTwo, setRedTwo] = useState("");
   const [shake, setShake] = useState("");
   const [shakeTwo, setShakeTwo] = useState("");
+  const [active, setActive] = useState(true);
 
   const sk = "shake 0.2s ease-in-out 0s 2";
 
@@ -35,7 +33,7 @@ const Login = ({ setMovies, movies }) => {
       >
         {"Copyright © "}
         <Link color="inherit" href="http://localhost:3000/">
-          Carls
+          Randomflix
         </Link>{" "}
         {new Date().getFullYear()}
       </Typography>
@@ -45,6 +43,9 @@ const Login = ({ setMovies, movies }) => {
   useEffect(() => {
     setLoggedIn(false);
     localStorage.clear();
+    if (register) {
+      setActive(false);
+    }
   }, []);
 
   const handleEmail = (e) => {
@@ -56,7 +57,13 @@ const Login = ({ setMovies, movies }) => {
   };
 
   const handleRegister = () => {
+    setActive(false);
+
     navigate(`/register`);
+  };
+  const handleLogin = () => {
+    setActive(true);
+    navigate(`/`);
   };
 
   const handleSubmit = (e) => {
@@ -107,7 +114,7 @@ const Login = ({ setMovies, movies }) => {
           setShake(sk);
           setShakeTwo(sk);
           console.log("Please use register to create a new user");
-        } 
+        }
       } catch (error) {
         console.error("Error occurred during login: ", error);
       }
@@ -120,8 +127,20 @@ const Login = ({ setMovies, movies }) => {
     <div className={classes.background}>
       <div className={classes.formContainer}>
         <h1 className={classes.titleForm}>
-          <span className={classes.active}> Login</span> |{" "}
-          <span className={classes}>Signup</span>
+          <button
+            onClick={handleLogin}
+            className={active ? `${classes.active}` : `${classes.inactive}`}
+          >
+            {" "}
+            Login
+          </button>{" "}
+          |{" "}
+          <button
+            onClick={handleRegister}
+            className={active ? `${classes.inactive}` : `${classes.active}`}
+          >
+            Signup
+          </button>
         </h1>
         <div className={classes.register}>
           <p className={classes.undertext}>Login to access your account</p>
@@ -156,11 +175,13 @@ const Login = ({ setMovies, movies }) => {
             value={password}
             onChange={handlePassword}
           />
-          
-            <div className={failed ? `${classes.error}` : `${classes.errorInactive}`}>
-              Invalid email and/or password provided
-            </div>
-          
+
+          <div
+            className={failed ? `${classes.error}` : `${classes.errorInactive}`}
+          >
+            Invalid email and/or password provided
+          </div>
+
           <button className={classes.logBut} type="submit">
             LOGIN
           </button>

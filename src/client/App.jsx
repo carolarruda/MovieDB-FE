@@ -50,7 +50,9 @@ function App() {
           />
           <Route
             path="/register"
-            element={<RegisterUI setMovies={setMovies} />}
+            element={<Login 
+              register={true}
+              setMovies={setMovies} />}
           />
         </Routes>
       </div>

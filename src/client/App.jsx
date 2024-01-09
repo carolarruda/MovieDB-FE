@@ -1,4 +1,4 @@
-import LoginUI from "../components/LoginUI";
+import Login from "../components/Login";
 import MovieList from "../components/MovieList";
 import React, { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
@@ -37,7 +37,7 @@ function App() {
     <Context.Provider value={[loggedIn, setLoggedIn]}>
       <div className="App">
         <Routes>
-          <Route path="/" element={<LoginUI setMovies={setMovies} />} />
+          <Route path="/" element={<Login setMovies={setMovies} />} />
           <Route
             path="/home"
             element={

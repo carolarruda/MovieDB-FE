@@ -58,7 +58,6 @@ const Login = ({ setMovies, movies, register }) => {
 
   const handleRegister = () => {
     setActive(false);
-
     navigate(`/register`);
   };
   const handleLogin = () => {
@@ -82,6 +81,17 @@ const Login = ({ setMovies, movies, register }) => {
 
     async function loginUser() {
       try {
+        if (register) {
+          const registerResponse = await fetch(
+            "https://puce-glorious-turtle.cyclic.app/register",
+            opts
+          );
+          const data = await registerResponse.json();
+          setStatus(registerResponse.status);
+          if (registerResponse.status === 201) {
+            console.log("success");
+          }
+        }
         const loginResponse = await fetch(
           "https://puce-glorious-turtle.cyclic.app/login",
           opts
@@ -94,18 +104,19 @@ const Login = ({ setMovies, movies, register }) => {
           localStorage.setItem("token", data.token);
           const token = localStorage.getItem("token");
           localStorage.setItem("userId", data.user.userId);
+          if (!register) {
+            const moviesResponse = await fetch(
+              `https://puce-glorious-turtle.cyclic.app/movie`,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+            const moviesData = await moviesResponse.json();
+            setMovies(moviesData);
+          }
 
-          let userId = data.user.userId;
-          const moviesResponse = await fetch(
-            `https://puce-glorious-turtle.cyclic.app/movie`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          const moviesData = await moviesResponse.json();
-          setMovies(moviesData);
           navigate(`/home`);
         } else {
           setFailed(true);
@@ -143,7 +154,13 @@ const Login = ({ setMovies, movies, register }) => {
           </button>
         </h1>
         <div className={classes.register}>
-          <p className={classes.undertext}>Login to access your account</p>
+          {!register ? (
+            <p className={classes.undertext}>Login to access your account</p>
+          ) : (
+            <p className={classes.undertext}>
+              Create your free account and start browsing
+            </p>
+          )}
         </div>
 
         <form
@@ -182,9 +199,15 @@ const Login = ({ setMovies, movies, register }) => {
             Invalid email and/or password provided
           </div>
 
-          <button className={classes.logBut} type="submit">
-            LOGIN
-          </button>
+          {!register ? (
+            <button className={classes.logBut} type="submit">
+              LOGIN
+            </button>
+          ) : (
+            <button className={classes.logBut} type="submit">
+              SIGNUP
+            </button>
+          )}
           <Copyright sx={{ mt: 5, color: "rgba(122, 122, 122, 0.342)" }} />
         </form>
       </div>
